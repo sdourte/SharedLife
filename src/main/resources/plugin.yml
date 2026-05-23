@@ -1,0 +1,7 @@
+name: SharedLife
+
+version: '1.0'
+
+main: me.simon.sharedlife.SharedLife
+
+api-version: '1.21'

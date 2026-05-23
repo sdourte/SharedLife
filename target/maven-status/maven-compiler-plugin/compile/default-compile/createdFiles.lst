@@ -1,0 +1,5 @@
+me\simon\sharedLife\game\GameState.class
+me\simon\sharedLife\listeners\HungerListener.class
+me\simon\sharedLife\listeners\DamageListener.class
+me\simon\sharedLife\SharedLife.class
+me\simon\sharedLife\managers\SharedStatsManager.class
