@@ -5,3 +5,8 @@ version: '1.0'
 main: me.simon.sharedlife.SharedLife
 
 api-version: '1.21'
+
+commands:
+
+  startadventure:
+    description: Lance une aventure SharedLife
