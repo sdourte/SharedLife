@@ -14,6 +14,22 @@ public class GameManager {
     // Etat actuel
     private GameState gameState;
 
+    /*
+     * Temps début aventure.
+     */
+    private long startTime;
+
+    /*
+     * Temps final.
+     */
+    private String finalTime;
+
+    // Getter final time
+    public String getFinalTime() {
+
+        return finalTime;
+    }
+
     public GameManager(
             SharedLife plugin
     ) {
@@ -36,9 +52,59 @@ public class GameManager {
     }
 
     /*
+     * Retourne temps formaté.
+     */
+    public String getFormattedTime() {
+
+        /*
+         * Vérifie partie active.
+         */
+        if (gameState
+                == GameState.WAITING) {
+
+            return "00:00:00";
+        }
+
+        /*
+         * Temps écoulé.
+         */
+        long elapsed =
+                System.currentTimeMillis()
+                        - startTime;
+
+        /*
+         * Conversion secondes.
+         */
+        long totalSeconds =
+                elapsed / 1000;
+
+        long hours =
+                totalSeconds / 3600;
+
+        long minutes =
+                (totalSeconds % 3600) / 60;
+
+        long seconds =
+                totalSeconds % 60;
+
+        return String.format(
+                "%02d:%02d:%02d",
+                hours,
+                minutes,
+                seconds
+        );
+    }
+
+    /*
      * Lance aventure.
      */
     public void startAdventure() {
+
+        /*
+         * Sauvegarde temps début.
+         */
+        startTime =
+                System.currentTimeMillis();
 
         /*
          * Vérifie état.
@@ -113,6 +179,12 @@ public class GameManager {
         }
 
         /*
+         * Sauvegarde temps final.
+         */
+        finalTime =
+                getFormattedTime();
+
+        /*
          * Etat terminé.
          */
         gameState =
@@ -120,6 +192,11 @@ public class GameManager {
 
         Bukkit.broadcastMessage(
                 "§6L'aventure est terminée !"
+        );
+
+        Bukkit.broadcastMessage(
+                "§aTemps final : §f"
+                        + finalTime
         );
     }
 
@@ -132,7 +209,7 @@ public class GameManager {
         plugin.getPhaseManager()
                 .getBossBar()
                 .setVisible(false);
-        
+
         /*
          * Reset objectifs.
          */

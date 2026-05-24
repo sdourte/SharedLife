@@ -329,6 +329,12 @@ public class PhaseListener
                         "Dragon"
                 );
 
+        /*
+         * Fin aventure.
+         */
+        plugin.getGameManager()
+                .endAdventure();
+
         Bukkit.broadcastMessage(
                 "§aTous les objectifs sont terminés !"
         );

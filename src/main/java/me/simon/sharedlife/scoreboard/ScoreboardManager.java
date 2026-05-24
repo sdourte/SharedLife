@@ -47,11 +47,19 @@ public class ScoreboardManager {
                     DisplaySlot.SIDEBAR
             );
 
+            // init variable score
             int score =
                     plugin.getPhaseManager()
                             .getPhases()
                             .size() + 2;
 
+            objective.getScore(
+                    "  "
+            ).setScore(score);
+
+            score--;
+
+            // Titre
             objective.getScore(
                     "§eObjectifs :"
             ).setScore(score);
@@ -64,6 +72,7 @@ public class ScoreboardManager {
 
             score--;
 
+            // Les objectifs
             for (Phase phase
                     : plugin.getPhaseManager()
                     .getPhases()) {
@@ -92,6 +101,19 @@ public class ScoreboardManager {
             player.setScoreboard(
                     scoreboard
             );
+
+            objective.getScore(
+                    "   "
+            ).setScore(score);
+
+            score--;
+
+            // Timer
+            objective.getScore(
+                    "§fTemps : §a"
+                            + plugin.getGameManager()
+                            .getFormattedTime()
+            ).setScore(score);
         }
     }
 }

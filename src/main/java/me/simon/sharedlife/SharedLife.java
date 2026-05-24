@@ -81,6 +81,25 @@ public final class SharedLife
         scoreboardManager.updateScoreboards();
 
         /*
+         * Update scoreboard timer.
+         */
+        getServer().getScheduler()
+                .runTaskTimer(
+                        this,
+                        () -> {
+
+                            /*
+                             * Update scoreboards.
+                             */
+                            scoreboardManager
+                                    .updateScoreboards();
+
+                        },
+                        20L,
+                        20L
+                );
+
+        /*
          * Listeners.
          */
         getServer().getPluginManager().registerEvents(new DamageListener(this), this);
