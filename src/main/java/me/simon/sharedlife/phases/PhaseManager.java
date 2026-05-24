@@ -183,7 +183,8 @@ public class PhaseManager {
         for (Phase phase : phases) {
 
             if (!phase.isCompleted()) {
-                return false;
+                // L'objectif dragon est le dernier
+                return phase.getName().equals("Dragon");
             }
         }
 

@@ -7,6 +7,9 @@ import me.simon.sharedlife.phases.Phase;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+
+import org.bukkit.advancement.Advancement;
 
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Player;
@@ -17,12 +20,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
 import org.bukkit.event.enchantment.EnchantItemEvent;
+
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import org.bukkit.event.inventory.CraftItemEvent;
 
+import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-
 import org.bukkit.event.player.PlayerPortalEvent;
 
 import org.bukkit.inventory.ItemStack;
@@ -63,7 +67,6 @@ public class PhaseListener
 
     /*
      * Pioche fer
-     * + enchantement
      * + eye of ender.
      */
     @EventHandler
@@ -171,7 +174,7 @@ public class PhaseListener
     }
 
     /*
-     * Nether + Stronghold.
+     * Nether.
      */
     @EventHandler
     public void onWorldChange(
@@ -203,17 +206,38 @@ public class PhaseListener
                             "Nether"
                     );
         }
+    }
+
+    /*
+     * Stronghold.
+     */
+    @EventHandler
+    public void onAdvancement(
+            PlayerAdvancementDoneEvent event
+    ) {
 
         /*
-         * End.
+         * Vérifie partie active.
          */
-        if (player.getWorld()
-                .getEnvironment()
-                == org.bukkit.World.Environment.THE_END) {
+        if (plugin.getGameManager()
+                .getGameState()
+                != GameState.RUNNING) {
 
-            /*
-             * Stronghold trouvé.
-             */
+            return;
+        }
+
+        Advancement advancement =
+                event.getAdvancement();
+
+        /*
+         * Vérifie advancement Stronghold.
+         */
+        if (advancement.getKey().equals(
+                NamespacedKey.minecraft(
+                        "story/follow_ender_eye"
+                )
+        )) {
+
             plugin.getPhaseManager()
                     .completePhase(
                             "Stronghold"

@@ -50,7 +50,19 @@ public class ScoreboardManager {
             int score =
                     plugin.getPhaseManager()
                             .getPhases()
-                            .size();
+                            .size() + 2;
+
+            objective.getScore(
+                    "§eObjectifs :"
+            ).setScore(score);
+
+            score--;
+
+            objective.getScore(
+                    " "
+            ).setScore(score);
+
+            score--;
 
             for (Phase phase
                     : plugin.getPhaseManager()
